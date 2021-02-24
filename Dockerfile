@@ -33,6 +33,7 @@ RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.
 RUN mkdir boxbilling
 RUN unzip -d ./boxbilling BoxBilling.zip
 RUN mv boxbilling /var/www/localhost/htdocs
+RUN chmod -R 0755 /var/www/localhost/htdocs/boxbilling
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
