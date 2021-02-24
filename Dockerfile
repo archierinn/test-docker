@@ -42,7 +42,7 @@ RUN find . -type f -exec chmod 644 {} \;
 # RUN composer install
 # run apache server
 EXPOSE 8004
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+#RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
 #RUN rc-service apache2 start
 CMD ["httpd", "-D","FOREGROUND"]
