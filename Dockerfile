@@ -7,7 +7,7 @@ FROM alpine:latest
 RUN apk update
 RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
 RUN apk add apache2 php$phpverx-apache2
-
+RUN apk add openrc
 #ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 #RUN apk --update-cache add ca-certificates && \
 #    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
