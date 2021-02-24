@@ -5,7 +5,7 @@ FROM alpine:latest
 #http://dl-cdn.alpinelinux.org/alpine/v"$(cat /etc/alpine-release | cut -d'.' -f1,2)"/community' >> /etc/apk/repositories
 
 RUN apk update
-RUN apk add openrc sed
+RUN apk add openrc sed curl
 RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
 RUN apk add apache2 php$phpverx-apache2
 RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:8004/' /etc/apache2/httpd.conf
@@ -35,8 +35,9 @@ RUN cd boxbilling
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
 RUN mv bb-config-sample.php bb-config.php
-RUN find . -type d -exec chmod 755 {} \;
-RUN find . -type f -exec chmod 644 {} \;
+RUN chmod 777 bb-data/cache
+#RUN find . -type d -exec chmod 755 {} \;
+#RUN find . -type f -exec chmod 644 {} \;
 #RUN mv boxbilling /var/www/localhost/htdocs
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
