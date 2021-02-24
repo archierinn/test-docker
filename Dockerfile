@@ -25,6 +25,8 @@ RUN apk add --update-cache \
 #RUN apk add git unzip
 # install GCC
 #RUN apk add build-base
+# install composer
+RUN apk add composer
 # install Boxbilling
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN mkdir boxbilling
