@@ -35,5 +35,6 @@ RUN mv boxbilling /var/www/localhost/htdocs
 RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
-RUN rc-service apache2 start
+#RUN rc-service apache2 start
 EXPOSE 8004
+CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]
