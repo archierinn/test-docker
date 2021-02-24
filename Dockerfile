@@ -37,4 +37,4 @@ RUN cd /var/www/localhost/htdocs/boxbilling
 # run apache server
 #RUN rc-service apache2 start
 EXPOSE 8004
-CMD [ "/usr/sbin/apache2ctl", "-D", "FOREGROUND" ]
+CMD ["apache2ctl", "-D","FOREGROUND"]
