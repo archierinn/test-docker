@@ -37,4 +37,5 @@ RUN mv boxbilling /var/www/localhost/htdocs
 # run apache server
 #RUN rc-service apache2 start
 EXPOSE 8004
-CMD ["apache2ctl", "-D","FOREGROUND"]
+RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+CMD ["httpd", "-D","FOREGROUND"]
