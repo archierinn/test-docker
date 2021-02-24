@@ -26,12 +26,12 @@ RUN apk add --update-cache \
 # install GCC
 #RUN apk add build-base
 # install composer
-RUN apk add composer
+# RUN apk add composer
 # install Boxbilling
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN mkdir boxbilling
 RUN unzip -d ./boxbilling BoxBilling.zip
 RUN mv boxbilling /var/www/localhost/htdocs
 RUN cd /var/www/localhost/htdocs/boxbilling
-RUN composer install
+# RUN composer install
 EXPOSE 8004
