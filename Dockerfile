@@ -29,7 +29,7 @@ RUN apk add mysql mysql-client
 # install composer
 # RUN apk add composer
 # install Boxbilling
-WORKDIR /var/www/localhost/htdocs
+RUN cd /var/www/localhost/htdocs
 RUN mkdir boxbilling
 RUN cd boxbilling
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
