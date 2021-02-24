@@ -43,6 +43,6 @@ RUN find . -type f -exec chmod 644 {} \;
 # run apache server
 EXPOSE 8004
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-WORKDIR /var/www/localhost/htdocs/boxbilling
+#WORKDIR /var/www/localhost/htdocs/boxbilling
 #RUN rc-service apache2 start
 CMD ["httpd", "-D","FOREGROUND"]
