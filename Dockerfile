@@ -32,9 +32,9 @@ RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.
 RUN mkdir boxbilling
 RUN unzip -d ./boxbilling BoxBilling.zip
 RUN mv boxbilling /var/www/localhost/htdocs
-RUN cd /var/www/localhost/htdocs/boxbilling
+#RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
 #RUN rc-service apache2 start
 EXPOSE 8004
-CMD ["apache2ctl", "-D","FOREGROUND"]
+CMD ["httpd", "-D","FOREGROUND"]
