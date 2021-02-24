@@ -34,4 +34,6 @@ RUN unzip -d ./boxbilling BoxBilling.zip
 RUN mv boxbilling /var/www/localhost/htdocs
 RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
+# run apache server
+RUN rc-service apache2 start
 EXPOSE 8004
