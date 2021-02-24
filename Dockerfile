@@ -21,7 +21,7 @@ RUN apk add --update-cache \
     php7-gettext \
     php7-openssl
 # install mysql
-#RUN apk add mysql mysql-client
+RUN apk add mysql mysql-client
 # install Git
 #RUN apk add git unzip
 # install GCC
@@ -32,12 +32,17 @@ RUN apk add --update-cache \
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN mkdir boxbilling
 RUN unzip -d ./boxbilling BoxBilling.zip
+RUN cd boxbilling
+RUN mv bb-config-sample.php bb-config.php
+RUN find . -type d -exec chmod 755 {} \;
+RUN find . -type f -exec chmod 644 {} \;
+RUN cd ..
 RUN mv boxbilling /var/www/localhost/htdocs
-RUN chmod -R 0755 /var/www/localhost/htdocs/boxbilling
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
 EXPOSE 8004
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+WORKDIR /var/www/localhost/htdocs/boxbilling
 #RUN rc-service apache2 start
 CMD ["httpd", "-D","FOREGROUND"]
