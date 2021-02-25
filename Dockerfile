@@ -50,7 +50,7 @@ RUN unzip BoxBilling.zip
 RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
-RUN mv boxbilling /var/www/localhost/htdocs
+RUN mv billing /var/www/localhost/htdocs
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
