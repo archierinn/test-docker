@@ -1,17 +1,6 @@
 FROM alpine:latest
-# install Apache + PHP
-#RUN echo $'\n\
-#http://dl-cdn.alpinelinux.org/alpine/v"$(cat /etc/alpine-release | cut -d'.' -f1,2)"/main \
-#http://dl-cdn.alpinelinux.org/alpine/v"$(cat /etc/alpine-release | cut -d'.' -f1,2)"/community' >> /etc/apk/repositories
-#RUN apk update
-RUN apk add openrc sed curl
-#RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
-RUN apk add apache2 php7-apache2
-#RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:8004/' /etc/apache2/httpd.conf
-#ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
-#RUN apk --update-cache add ca-certificates && \
-#    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
-# install php and some extensions
+# Install Apache + PHP
+RUN apk add openrc sed curl apache2 php7-apache2
 RUN apk add --update-cache \
     php7 \
     php7-pdo_mysql \
@@ -25,55 +14,27 @@ RUN apk add --update-cache \
     php7-ctype \
     php7-json \
     php7-session
-# install IonCube 
-#RUN apk add --no-cache php7-imap && \
-#  mkdir -p setup && cd setup && \
-#  curl -sSL https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -o ioncube.tar.gz && \
-#  tar -xf ioncube.tar.gz && \
-#  mv ioncube/ioncube_loader_lin_7.2.so /usr/lib/php7/modules/ && \
-#  echo 'zend_extension = /usr/lib/php7/modules/ioncube_loader_lin_7.2.so' >  /etc/php7/conf.d/00-ioncube.ini && \
-#  cd .. && rm -rf setup
-# install mysql
-#RUN apk add mysql mysql-client
-# install Git
-#RUN apk add git unzip
-# install GCC
-#RUN apk add build-base
-# install composer
+# Install composer
 RUN apk add composer
-# install Boxbilling
+# Copy custom configuration
 COPY ./httpd.conf /etc/apache2/
 COPY ./php.ini /etc/php7/
-#RUN rc-service apache2 restart
-#RUN cd /var/www/localhost/htdocs
-#RUN mkdir billing
-#RUN chmod 777 billing
-#RUN cd billing
-#RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
-#RUN unzip BoxBilling.zip
+#d Download and install BoxBilling
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
-#RUN wget "https://github.com/boxbilling/boxbilling/releases/download/4.21/BoxBilling.zip"
 RUN mkdir billing
 RUN unzip -d ./billing BoxBilling.zip
 RUN rm BoxBilling.zip
 RUN mv billing/bb-config-sample.php billing/bb-config.php
-#RUN find . -type d -exec chmod 755 {} \;
-#RUN find . -type f -exec chmod 644 {} \;
 RUN mv billing /var/www/localhost/htdocs
 RUN chmod 755 /var/www/localhost/htdocs/billing
-RUN chmod 777 /var/www/localhost/htdocs/billing/bb-config.php
-RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
-RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/log
-RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/uploads
+RUN chmod 777 /var/www/localhost/htdocs/billing/bb-config.php \
+    /var/www/localhost/htdocs/billing/bb-data/cache \
+    /var/www/localhost/htdocs/billing/bb-data/log \
+    /var/www/localhost/htdocs/billing/bb-data/uploads
+# Change Work directory to path
 WORKDIR /var/www/localhost/htdocs/billing
-#COPY ./index.php /var/www/localhost/htdocs/billing/install/
-#RUN cd /var/www/localhost/htdocs/boxbilling
-#RUN composer install
-# run apache server
+# Listening to port 8004
 EXPOSE 8004
+# To avoid apache2 servername error
 RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
-#WORKDIR /var/www/localhost/htdocs/boxbilling
-#RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
-#RUN a2enmod rewrite
-#RUN rc-service apache2 start
 CMD ["httpd", "-D","FOREGROUND"]

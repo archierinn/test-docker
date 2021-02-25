@@ -4,6 +4,12 @@ services:
     build: .
     ports:
       - 8004:8004
+  webapp:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
   db:
     image: mysql
     ports:
@@ -11,8 +17,6 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: boxbilling
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: admin
     restart: always
   adminer:
     image: adminer
