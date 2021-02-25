@@ -22,9 +22,9 @@ COPY ./php.ini /etc/php7/
 #RUN rc-service php-fpm7 start
 RUN mkdir -p /run/nginx
 RUN mkdir -p /run/php-fpm7
-RUN mkdir -p /var/www/html/billing
-RUN chmod 755 /var/www/html/billing
-WORKDIR /var/www/html/billing
+RUN mkdir -p /var/www/billing
+RUN chmod 755 /var/www/billing
+WORKDIR /var/www/billing
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
 RUN chmod 777 bb-data/cache
