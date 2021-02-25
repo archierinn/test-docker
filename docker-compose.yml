@@ -6,12 +6,12 @@ services:
       - 8004:8004
     environment: 
       DB_HOST: database
-      DB_NAME: boxbilling
+      DB_NAME: billing
       DB_USER: root
       DB_PASS: root
     restart: always
   database:
-    image: mysql:alpine
+    image: mysql
     ports:
       - 3306:3306
     environment: 
@@ -21,7 +21,7 @@ services:
       - MYSQL_PASSWORD: root
     restart: always
   adminer:
-    image: adminer:alpine
+    image: adminer
     restart: always
     ports:
       - 8080:8080

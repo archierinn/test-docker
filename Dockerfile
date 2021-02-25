@@ -51,10 +51,10 @@ RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.
 RUN mkdir billing
 RUN unzip -d ./billing BoxBilling.zip
 #RUN mv bb-config-sample.php bb-config.php
-#RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
 RUN mv billing /var/www/localhost/htdocs
+RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
