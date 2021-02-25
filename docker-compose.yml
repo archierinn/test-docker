@@ -4,6 +4,8 @@ services:
     build: .
     ports:
       - 8004:8004
+    volumes: 
+      - .:/var/www/localhost/htdocs/billing
   db:
     image: mysql
     ports:
