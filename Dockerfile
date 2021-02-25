@@ -8,7 +8,7 @@ RUN apk update
 RUN apk add openrc sed curl
 RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
 RUN apk add apache2 php$phpverx-apache2
-RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:8004/' /etc/apache2/httpd.conf
+#RUN sed -i 's/^Listen 80$/Listen 0.0.0.0:8004/' /etc/apache2/httpd.conf
 #ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 #RUN apk --update-cache add ca-certificates && \
 #    echo "https://dl.bintray.com/php-alpine/v3.11/php-7.4" >> /etc/apk/repositories
@@ -19,9 +19,10 @@ RUN apk add --update-cache \
     php7-curl \
     php7-zlib \
     php7-gettext \
-    php7-openssl
+    php7-openssl \
+    php7 mcrypt
 # install mysql
-RUN apk add mysql mysql-client
+#RUN apk add mysql mysql-client
 # install Git
 #RUN apk add git unzip
 # install GCC
@@ -30,11 +31,12 @@ RUN apk add mysql mysql-client
 # RUN apk add composer
 # install Boxbilling
 RUN cd /var/www/localhost/htdocs
-RUN mkdir boxbilling
-RUN cd boxbilling
+RUN mkdir billing
+RUN chmod 777 billing
+RUN cd billing
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
-RUN mv bb-config-sample.php bb-config.php
+#RUN mv bb-config-sample.php bb-config.php
 RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
@@ -45,5 +47,5 @@ RUN chmod 777 bb-data/cache
 EXPOSE 8004
 #RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
-#RUN rc-service apache2 start
-CMD ["httpd", "-D","FOREGROUND"]
+RUN rc-service apache2 start
+#CMD ["httpd", "-D","FOREGROUND"]
