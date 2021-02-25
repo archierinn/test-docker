@@ -3,7 +3,6 @@ FROM alpine:latest
 #RUN echo $'\n\
 #http://dl-cdn.alpinelinux.org/alpine/v"$(cat /etc/alpine-release | cut -d'.' -f1,2)"/main \
 #http://dl-cdn.alpinelinux.org/alpine/v"$(cat /etc/alpine-release | cut -d'.' -f1,2)"/community' >> /etc/apk/repositories
-
 RUN apk update
 RUN apk add openrc sed curl
 RUN export phpverx=$(alpinever=$(cat /etc/alpine-release|cut -d '.' -f1);[ $alpinever -ge 9 ] && echo  7|| echo 5)
@@ -22,7 +21,6 @@ RUN apk add --update-cache \
     php7-ftp \
     php7-gettext \
     php7-mcrypt
-
 # install IonCube 
 RUN apk add --no-cache php7-imap && \
   mkdir -p setup && cd setup && \
@@ -40,7 +38,9 @@ RUN apk add --no-cache php7-imap && \
 # install composer
 # RUN apk add composer
 # install Boxbilling
-RUN cd /var/www/localhost/htdocs
+COPY ./httpd.conf /etc/apache2/
+RUN rc-service apache2 restart
+#RUN cd /var/www/localhost/htdocs
 RUN mkdir billing
 RUN chmod 777 billing
 RUN cd billing
@@ -50,7 +50,7 @@ RUN unzip BoxBilling.zip
 RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
-#RUN mv boxbilling /var/www/localhost/htdocs
+RUN mv boxbilling /var/www/localhost/htdocs
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
 # run apache server
