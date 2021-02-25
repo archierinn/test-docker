@@ -13,8 +13,8 @@ RUN apk --no-cache add \
     php7-openssl
 
 COPY ./default.conf /etc/nginx/conf.d/
-#COPY ./billing /etc/nginx/sites-available/
-#RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
+COPY ./billing /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
 COPY ./php.ini /etc/php7/
 RUN mkdir -p /run/nginx
 RUN mkdir -p /var/www/billing
