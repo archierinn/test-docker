@@ -39,7 +39,7 @@ RUN apk add --no-cache php7-imap && \
 # RUN apk add composer
 # install Boxbilling
 COPY ./httpd.conf /etc/apache2/
-RUN rc-service apache2 restart
+#RUN rc-service apache2 restart
 #RUN cd /var/www/localhost/htdocs
 RUN mkdir billing
 RUN chmod 777 billing
