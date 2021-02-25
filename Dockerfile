@@ -13,6 +13,7 @@ RUN apk --no-cache add \
     php7-openssl
 
 COPY ./default.conf /etc/nginx/http.d/
+COPY ./nginx.conf /etc/nginx/
 #COPY ./billing /etc/nginx/sites-available/
 #RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
 COPY ./php.ini /etc/php7/
