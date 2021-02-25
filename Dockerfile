@@ -55,6 +55,7 @@ RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.
 #RUN wget "https://github.com/boxbilling/boxbilling/releases/download/4.21/BoxBilling.zip"
 RUN mkdir billing
 RUN unzip -d ./billing BoxBilling.zip
+RUN rm BoxBilling.zip
 RUN mv billing/bb-config-sample.php billing/bb-config.php
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
@@ -64,6 +65,7 @@ RUN chmod 777 /var/www/localhost/htdocs/billing/bb-config.php
 RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
 RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/log
 RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/uploads
+WORKDIR /var/www/localhost/htdocs/billing
 #COPY ./index.php /var/www/localhost/htdocs/billing/install/
 #RUN cd /var/www/localhost/htdocs/boxbilling
 #RUN composer install
