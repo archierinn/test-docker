@@ -23,7 +23,8 @@ RUN apk add --update-cache \
     php7-mcrypt \ 
     php7-openssl \
     php7-ctype \
-    php7-json
+    php7-json \
+    php7-session
 # install IonCube 
 #RUN apk add --no-cache php7-imap && \
 #  mkdir -p setup && cd setup && \
