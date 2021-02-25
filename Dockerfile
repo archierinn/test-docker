@@ -19,8 +19,9 @@ COPY ./nginx.conf /etc/nginx/
 #COPY ./billing /etc/nginx/sites-available/
 #RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
 COPY ./php.ini /etc/php7/
-RUN rc-service php-fpm7 start
+#RUN rc-service php-fpm7 start
 RUN mkdir -p /run/nginx
+RUN mkdir -p /run/php-fpm7
 RUN mkdir -p /var/www/billing
 RUN chmod 755 /var/www/billing
 WORKDIR /var/www/billing
