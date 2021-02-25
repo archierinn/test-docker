@@ -20,7 +20,16 @@ RUN apk add --update-cache \
     php7-zlib \
     php7-gettext \
     php7-openssl \
-    php7 mcrypt
+    php7-mcrypt
+
+# install IonCube 
+RUN apk add --no-cache php7-imap && \
+  mkdir -p setup && cd setup && \
+  curl -sSL https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz -o ioncube.tar.gz && \
+  tar -xf ioncube.tar.gz && \
+  mv ioncube/ioncube_loader_lin_7.2.so /usr/lib/php7/modules/ && \
+  echo 'zend_extension = /usr/lib/php7/modules/ioncube_loader_lin_7.2.so' >  /etc/php7/conf.d/00-ioncube.ini && \
+  cd .. && rm -rf setup
 # install mysql
 #RUN apk add mysql mysql-client
 # install Git
@@ -47,5 +56,7 @@ RUN chmod 777 bb-data/cache
 EXPOSE 8004
 #RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
+RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+RUN a2enmod rewrite
 RUN rc-service apache2 start
 #CMD ["httpd", "-D","FOREGROUND"]
