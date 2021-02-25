@@ -21,7 +21,9 @@ RUN apk add --update-cache \
     php7-ftp \
     php7-gettext \
     php7-mcrypt \ 
-    php7-openssl
+    php7-openssl \
+    php7-ctype \
+    php7-json
 # install IonCube 
 #RUN apk add --no-cache php7-imap && \
 #  mkdir -p setup && cd setup && \
@@ -37,7 +39,7 @@ RUN apk add --update-cache \
 # install GCC
 #RUN apk add build-base
 # install composer
-# RUN apk add composer
+RUN apk add composer
 # install Boxbilling
 COPY ./httpd.conf /etc/apache2/
 COPY ./php.ini /etc/php7/
@@ -59,7 +61,7 @@ RUN mv billing /var/www/localhost/htdocs
 RUN chmod 755 /var/www/localhost/htdocs/billing
 RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
 #RUN cd /var/www/localhost/htdocs/boxbilling
-# RUN composer install
+#RUN composer install
 # run apache server
 EXPOSE 8004
 RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
