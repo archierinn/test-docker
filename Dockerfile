@@ -50,8 +50,8 @@ COPY ./php.ini /etc/php7/
 #RUN cd billing
 #RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 #RUN unzip BoxBilling.zip
-#RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
-RUN wget "https://github.com/boxbilling/boxbilling/releases/download/4.21/BoxBilling.zip"
+RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
+#RUN wget "https://github.com/boxbilling/boxbilling/releases/download/4.21/BoxBilling.zip"
 RUN mkdir billing
 RUN unzip -d ./billing BoxBilling.zip
 #RUN mv bb-config-sample.php bb-config.php
@@ -60,6 +60,7 @@ RUN unzip -d ./billing BoxBilling.zip
 RUN mv billing /var/www/localhost/htdocs
 RUN chmod 755 /var/www/localhost/htdocs/billing
 RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
+COPY ./index.php /var/www/localhost/htdocs/billing/install/
 #RUN cd /var/www/localhost/htdocs/boxbilling
 #RUN composer install
 # run apache server
