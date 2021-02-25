@@ -57,7 +57,7 @@ RUN chmod 777 bb-data/cache
 EXPOSE 8004
 #RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
-RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
+#RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 RUN a2enmod rewrite
 RUN rc-service apache2 start
 #CMD ["httpd", "-D","FOREGROUND"]
