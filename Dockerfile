@@ -41,16 +41,18 @@ RUN apk add --no-cache php7-imap && \
 COPY ./httpd.conf /etc/apache2/
 #RUN rc-service apache2 restart
 #RUN cd /var/www/localhost/htdocs
-RUN mkdir billing
+#RUN mkdir billing
 #RUN chmod 777 billing
-RUN cd billing
+#RUN cd billing
+#RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
+#RUN unzip BoxBilling.zip
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
-RUN unzip BoxBilling.zip
+RUN mkdir billing
+RUN unzip -d ./billing BoxBilling.zip
 #RUN mv bb-config-sample.php bb-config.php
 #RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
-RUN cd ..
 RUN mv billing /var/www/localhost/htdocs
 #RUN cd /var/www/localhost/htdocs/boxbilling
 # RUN composer install
