@@ -12,7 +12,7 @@ RUN apk --no-cache add \
     php7-mcrypt \
     php7-openssl
 
-#COPY ./default.conf /etc/nginx/conf.d/
+COPY ./default.conf /etc/nginx/http.d/
 #COPY ./billing /etc/nginx/sites-available/
 #RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
 COPY ./php.ini /etc/php7/
@@ -23,5 +23,5 @@ WORKDIR /var/www/billing
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
 RUN chmod 777 bb-data/cache
-EXPOSE 8004 80
+EXPOSE 8004
 CMD ["nginx", "-g", "daemon off;"]
