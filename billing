@@ -1,0 +1,13 @@
+server {
+    listen 8004;
+    listen [::]:8004;
+
+    root /var/www/billing;
+    index index.php index.html index.htm index.nginx-debian.html;
+    
+    server_name localhost;
+
+    location / {
+            try_files $uri $uri/ =404;
+    }
+}

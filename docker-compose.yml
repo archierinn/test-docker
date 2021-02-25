@@ -5,12 +5,12 @@ services:
     ports:
       - 8004:8004
     environment: 
-      DB_HOST: database
+      DB_HOST: db
       DB_NAME: billing
       DB_USER: root
       DB_PASS: root
     restart: always
-  database:
+  db:
     image: mysql
     ports:
       - 3306:3306
