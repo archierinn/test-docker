@@ -64,7 +64,7 @@ RUN chmod 777 /var/www/localhost/htdocs/billing/bb-data/cache
 #RUN composer install
 # run apache server
 EXPOSE 8004
-#RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
+RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
 #RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 #RUN a2enmod rewrite
