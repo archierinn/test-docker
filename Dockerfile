@@ -11,14 +11,15 @@ RUN apk --no-cache add \
     php7-gettext \
     php7-mcrypt \
     php7-openssl \
-    php7-fpm
+    php7-fpm \
+    openrc
 
 COPY ./billing.conf /etc/nginx/http.d/
 COPY ./nginx.conf /etc/nginx/
 #COPY ./billing /etc/nginx/sites-available/
 #RUN ln -s /etc/nginx/sites-available/billing /etc/nginx/sites-enabled/
 COPY ./php.ini /etc/php7/
-RUN rc-service php7-fpm start
+RUN rc-service php-fpm7 start
 RUN mkdir -p /run/nginx
 RUN mkdir -p /var/www/billing
 RUN chmod 755 /var/www/billing
