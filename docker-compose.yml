@@ -6,8 +6,8 @@ services:
       - 8004:8004
   webapp:
     build:
-      context: ./php
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./php/Dockerfile
     ports:
       - 80:80
   db:

@@ -17,8 +17,8 @@ RUN apk add --update-cache \
 # Install composer + git
 RUN apk add composer git
 # Copy custom configuration
-COPY ./httpd.conf /etc/apache2/
-COPY ../php.ini /etc/php7/
+COPY ./php/httpd.conf /etc/apache2/
+COPY ./php.ini /etc/php7/
 #d Download and install BoxBilling
 RUN git clone "https://github.com/archierinn/test-php.git"
 RUN mv test-php /var/www/localhost/htdocs
