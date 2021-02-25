@@ -25,7 +25,7 @@ RUN mv test-php /var/www/localhost/htdocs
 RUN chmod 755 /var/www/localhost/htdocs/test-php
 # Change Work directory to path
 WORKDIR /var/www/localhost/htdocs/test-php
-# Listening to port 8004
+# Listening to port 80
 EXPOSE 80
 # To avoid apache2 servername error
 RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
