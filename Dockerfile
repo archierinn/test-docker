@@ -1,5 +1,5 @@
 FROM alpine:latest
-RUN apk add --no-cache add \
+RUN apk --no-cache add \
     curl \
     nginx \
     php7 \
