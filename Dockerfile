@@ -42,12 +42,12 @@ COPY ./httpd.conf /etc/apache2/
 #RUN rc-service apache2 restart
 #RUN cd /var/www/localhost/htdocs
 RUN mkdir billing
-RUN chmod 777 billing
+#RUN chmod 777 billing
 RUN cd billing
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
 #RUN mv bb-config-sample.php bb-config.php
-RUN chmod 777 bb-data/cache
+#RUN chmod 777 bb-data/cache
 #RUN find . -type d -exec chmod 755 {} \;
 #RUN find . -type f -exec chmod 644 {} \;
 RUN mv billing /var/www/localhost/htdocs
@@ -55,7 +55,7 @@ RUN mv billing /var/www/localhost/htdocs
 # RUN composer install
 # run apache server
 EXPOSE 8004
-#RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+RUN echo "ServerName localhost" >> /etc/apache2/httpd.conf
 #WORKDIR /var/www/localhost/htdocs/boxbilling
 #RUN cp /etc/apache2/mods-available/rewrite.load /etc/apache2/mods-enabled/
 #RUN a2enmod rewrite
