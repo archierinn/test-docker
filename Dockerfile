@@ -18,7 +18,8 @@ COPY ./default.conf /etc/nginx/conf.d/
 COPY ./php.ini /etc/php7/
 RUN mkdir -p /run/nginx
 RUN mkdir -p /var/www/html/billing
-WORKDIR /var/www/billing
+RUN chmod 755 /var/www/html/billing
+WORKDIR /var/www/html/billing
 RUN wget "https://github.com/boxbilling/boxbilling/releases/download/v4.22-beta.1/BoxBilling.zip"
 RUN unzip BoxBilling.zip
 RUN chmod 777 bb-data/cache
